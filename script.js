@@ -15,16 +15,16 @@ const pipeMap = {
 // ヒーター電線外径（固定値）
 const heaterWireDiameter = 38.0;
 
-// 選択変更時に配管外径を表示
+// 各選択欄に対して「選んだら右に表示」
 document.querySelectorAll(".pipe-select").forEach(select => {
   select.addEventListener("change", () => {
     const row = select.closest(".row");
-    const display = row.querySelector(".diameter");
+    const diameterSpan = row.querySelector(".diameter");
 
     if (pipeMap[select.value]) {
-      display.textContent = `配管外径：${pipeMap[select.value]}`;
+      diameterSpan.textContent = `外径：${pipeMap[select.value]}`;
     } else {
-      display.textContent = "配管外径：-";
+      diameterSpan.textContent = "外径：-";
     }
   });
 });
