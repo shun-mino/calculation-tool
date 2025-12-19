@@ -15,29 +15,42 @@ const pipeMap = {
 // ヒーター電線外径（固定値）
 const heaterWireDiameter = 38.0;
 
-// 各選択欄に対して「選んだら右に表示」
-document.querySelectorAll(".pipe-select").forEach(select => {
-  select.addEventListener("change", () => {
-    const row = select.closest(".row");
-    const diameterSpan = row.querySelector(".diameter");
-
-    if (pipeMap[select.value]) {
-      diameterSpan.textContent = `外径：${pipeMap[select.value]}`;
-    } else {
-      diameterSpan.textContent = "外径：-";
-    }
-  });
+// 配管サイズ選択時に外径表示
+document.getElementById("pipeSize").addEventListener("change", (e) => {
+  const d = pipeMap[e.target.value];
+  document.getElementById("pipeDiameter").textContent =
+    d ? `外径：${d}` : "外径：-";
 });
 
-// 合計計算（前回と同じ）
+// 計算処理
 document.getElementById("calcBtn").addEventListener("click", () => {
-  let total = 0;
+  const pipeSize = document.getElementById("pipeSize").value;
+  const pipeLength = Number(document.getElementById("pipeLength").value);
+  const heaterLength = Number(document.getElementById("heaterLength").value);
+  const escapeLength = Number(document.getElementById("escapeLength").value);
+  const resultSpan = document.getElementById("calcResult");
 
-  document.querySelectorAll(".pipe-select").forEach(select => {
-    if (pipeMap[select.value]) {
-      total += pipeMap[select.value];
-    }
-  });
+  // 入力チェック
+  if (!pipeMap[pipeSize] || pipeLength <= 0 || heaterLength <= 0) {
+    resultSpan.textContent = "入力エラー";
+    return;
+  }
 
-  document.getElementById("resultValue").textContent = total.toFixed(1);
+  const pipeDiameter = pipeMap[pipeSize];
+
+  // √の中身
+  const rootInner =
+    heaterLength / pipeLength - escapeLength - 1;
+
+  if (rootInner <= 0) {
+    resultSpan.textContent = "計算不可（√の中が0以下）";
+    return;
+  }
+
+  // 計算式（確定）
+  const result =
+    Math.PI * (heaterWireDiameter + pipeDiameter) /
+    Math.sqrt(rootInner);
+
+  resultSpan.textContent = result.toFixed(3);
 });
