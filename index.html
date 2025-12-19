@@ -2,12 +2,12 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>配管計算ツール</title>
+  <title>配管ヒーター計算ツール</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h1>配管計算ツール</h1>
+<h1>配管ヒーター計算ツール</h1>
 
 <div class="container">
 
@@ -32,34 +32,30 @@
 
   <!-- 入力② 配管長さ -->
   <div class="row">
-    <label>配管長さ(ｍ)</label>
-    <input type="number" id="pipeLength" placeholder="例：2.5">
+    <label>配管長さ</label>
+    <input type="number" id="pipeLength" placeholder="例：10">
+    <span class="unit">m</span>
   </div>
 
   <!-- 入力③ ヒーター電線全長 -->
   <div class="row">
-    <label>ヒーター電線全長（ｍ）</label>
-    <input type="number" id="heaterLength" placeholder="例：3.5">
+    <label>ヒーター電線全長</label>
+    <input type="number" id="heaterLength" placeholder="例：15">
+    <span class="unit">m</span>
   </div>
 
   <!-- 入力④ 配管逃げ寸法 -->
   <div class="row">
-    <label>配管逃げ寸法（ｍ）</label>
+    <label>配管逃げ寸法</label>
     <input type="number" id="escapeLength" placeholder="例：0.2">
   </div>
 
-  <button id="calcBtn">計算（仮）</button>
+  <button id="calcBtn">計算する</button>
 
   <div class="result">
-    <p>※ 計算ロジックは未実装</p>
-    <p class="note">ヒーター電線外径：38.0</p>
+    <p>計算結果：<span id="calcResult">-</span></p>
+    <p class="note">ヒーター電線外径：38.0 mm</p>
   </div>
-
-</div>
-
-<script src="script.js"></script>
-</body>
-</html>
 
 </div>
 
