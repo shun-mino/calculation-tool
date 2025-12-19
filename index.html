@@ -2,70 +2,64 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>スマホ対応 計算サイト</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 16px;
-    }
-
-    .container {
-      max-width: 400px;
-      margin: 0 auto;
-    }
-
-    input, button {
-      width: 100%;
-      font-size: 16px;
-      padding: 10px;
-      margin-bottom: 10px;
-    }
-
-    button {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-    }
-
-    #result {
-      font-size: 32px;      /* 文字を大きく */
-      font-weight: bold;   /* 太字 */
-      color: #222;
-      margin-top: 20px;
-      text-align: center;  /* 中央寄せ */
-    }
-
-  </style>
+  <title>配管長さ計算ツール</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
-    <h2>足し算計算</h2>
+<h1>配管長さ算出ツール</h1>
 
-    <input type="number" id="num1" placeholder="数字1">
-    <input type="number" id="num2" placeholder="数字2">
+<div class="container">
 
-    <button onclick="calculate()">計算する</button>
-
-    <p id="result">結果：</p>
+  <div class="input-group">
+    <label>入力①</label>
+    <select class="pipe-select">
+      <option value="">選択してください</option>
+      <option value="10A">10A</option>
+      <option value="15A">15A</option>
+      <option value="20A">20A</option>
+    </select>
   </div>
 
-  <script>
-    function calculate() {
-      const a = Number(document.getElementById("num1").value);
-      const b = Number(document.getElementById("num2").value);
+  <div class="input-group">
+    <label>入力②</label>
+    <select class="pipe-select">
+      <option value="">選択してください</option>
+      <option value="10A">10A</option>
+      <option value="15A">15A</option>
+      <option value="20A">20A</option>
+    </select>
+  </div>
 
-      if (isNaN(a) || isNaN(b)) {
-        document.getElementById("result").textContent = "数字を入力してください";
-        return;
-      }
+  <div class="input-group">
+    <label>入力③</label>
+    <select class="pipe-select">
+      <option value="">選択してください</option>
+      <option value="10A">10A</option>
+      <option value="15A">15A</option>
+      <option value="20A">20A</option>
+    </select>
+  </div>
 
-      document.getElementById("result").textContent = "結果：" + (a + b);
-    }
-  </script>
+  <div class="input-group">
+    <label>入力④</label>
+    <select class="pipe-select">
+      <option value="">選択してください</option>
+      <option value="10A">10A</option>
+      <option value="15A">15A</option>
+      <option value="20A">20A</option>
+    </select>
+  </div>
 
+  <button id="calcBtn">配管長さを表示</button>
+
+  <div class="result">
+    <p>配管長さ合計：<span id="resultValue">0</span></p>
+    <p class="note">ヒーター電線外径：38.0</p>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
