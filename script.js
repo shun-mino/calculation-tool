@@ -53,5 +53,5 @@ document.getElementById("calcBtn").addEventListener("click", () => {
     Math.PI * (heaterWireDiameter + pipeDiameter) /
     Math.sqrt(rootInner);
 
-  resultSpan.textContent = result.toFixed(2);
+  resultSpan.textContent = result.toFixed(2) + "mm";
 });
