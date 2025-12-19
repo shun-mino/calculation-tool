@@ -1,4 +1,4 @@
-// 配管サイズ → 配管外径（※数値は要確認）
+// 配管サイズ → 配管外径（mm）
 const pipeMap = {
   "15A": 21.7,
   "20A": 27.2,
@@ -12,22 +12,17 @@ const pipeMap = {
   "100A": 114.3
 };
 
-// ヒーター電線外径（固定）
+// ヒーター電線外径（mm・固定）
 const heaterWireDiameter = 38.0;
 
 // 配管サイズ選択 → 外径表示
 document.getElementById("pipeSize").addEventListener("change", (e) => {
-  const pipeDiameter = pipeMap[e.target.value];
-  const display = document.getElementById("pipeDiameter");
-
-  if (pipeDiameter) {
-    display.textContent = `外径：${pipeDiameter}`;
-  } else {
-    display.textContent = "外径：-";
-  }
+  const d = pipeMap[e.target.value];
+  document.getElementById("pipeDiameter").textContent =
+    d ? `外径：${d} mm` : "外径：-";
 });
 
-// 計算処理（前に確定した式）
+// 計算処理
 document.getElementById("calcBtn").addEventListener("click", () => {
   const pipeSize = document.getElementById("pipeSize").value;
   const pipeLength = Number(document.getElementById("pipeLength").value);
@@ -42,14 +37,18 @@ document.getElementById("calcBtn").addEventListener("click", () => {
 
   const pipeDiameter = pipeMap[pipeSize];
 
-  const rootInner =
-    heaterLength / pipeLength - escapeLength - 1;
+  // A = (ヒーター電線全長 / 配管長さ − 配管逃げ寸法)
+  const A = heaterLength / pipeLength - escapeLength;
+
+  // √(A² − 1)
+  const rootInner = Math.pow(A, 2) - 1;
 
   if (rootInner <= 0) {
-    resultSpan.textContent = "計算不可（√の中が0以下）";
+    resultSpan.textContent = "計算不可（条件不正）";
     return;
   }
 
+  // 最終式
   const result =
     Math.PI * (heaterWireDiameter + pipeDiameter) /
     Math.sqrt(rootInner);
