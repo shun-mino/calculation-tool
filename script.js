@@ -38,7 +38,7 @@ document.getElementById("calcBtn").addEventListener("click", () => {
   const pipeDiameter = pipeMap[pipeSize];
 
   // A = (ヒーター電線全長 / 配管長さ − 配管逃げ寸法)
-  const A = heaterLength / pipeLength - escapeLength;
+  const A = heaterLength / (pipeLength - escapeLength);
 
   // A² − 1
   const rootInner = Math.pow(A, 2) - 1;
