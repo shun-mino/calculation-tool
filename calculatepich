@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>配管長さ計算ツール</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>配管長さ算出ツール</h1>
+
+<div class="container">
+
+  <div class="input-group">
+    <label>入力①</label>
+    <select class="pipe-select">
+      <option value="">選択してください</option>
+      <option value="10A">10A</option>
+      <option value="15A">15A</option>
+      <option value="20A">20A</option>
+    </select>
+  </div>
+
+  <div class="input-group">
+    <label>入力②</label>
+    <select class="pipe-select">
+      <option value="">選択してください</option>
+      <option value="10A">10A</option>
+      <option value="15A">15A</option>
+      <option value="20A">20A</option>
+    </select>
+  </div>
+
+  <div class="input-group">
+    <label>入力③</label>
+    <select class="pipe-select">
+      <option value="">選択してください</option>
+      <option value="10A">10A</option>
+      <option value="15A">15A</option>
+      <option value="20A">20A</option>
+    </select>
+  </div>
+
+  <div class="input-group">
+    <label>入力④</label>
+    <select class="pipe-select">
+      <option value="">選択してください</option>
+      <option value="10A">10A</option>
+      <option value="15A">15A</option>
+      <option value="20A">20A</option>
+    </select>
+  </div>
+
+  <button id="calcBtn">配管長さを表示</button>
+
+  <div class="result">
+    <p>配管長さ合計：<span id="resultValue">0</span></p>
+    <p class="note">ヒーター電線外径：38.0</p>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
