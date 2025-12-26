@@ -22,36 +22,48 @@ document.getElementById("pipeSize").addEventListener("change", (e) => {
     d ? `外径：${d} mm` : "外径：-";
 });
 
-// 計算処理
+function calcOne(pipeLength, heaterLength, escapeLength, pipeDiameter) {
+  if (pipeLength <= escapeLength) return null;
+
+  const A = heaterLength / (pipeLength - escapeLength);
+  const rootInner = A * A - 1;
+  if (rootInner <= 0) return null;
+
+  return Math.PI * (38.0 + pipeDiameter) / Math.sqrt(rootInner);
+}
+
 document.getElementById("calcBtn").addEventListener("click", () => {
   const pipeSize = document.getElementById("pipeSize").value;
-  const pipeLength = Number(document.getElementById("pipeLength").value);
-  const heaterLength = Number(document.getElementById("heaterLength").value);
-  const escapeLength = Number(document.getElementById("escapeLength").value);
+  const pipeDiameter = pipeMap[pipeSize];
   const resultSpan = document.getElementById("calcResult");
 
-  if (!pipeMap[pipeSize] || pipeLength <= 0 || heaterLength <= 0) {
-    resultSpan.textContent = "入力エラー";
+  if (!pipeDiameter) {
+    resultSpan.textContent = "配管サイズ未選択";
     return;
   }
 
-  const pipeDiameter = pipeMap[pipeSize];
+  // 行き（通常）
+  const go = calcOne(
+    Number(pipeLengthL.value),
+    Number(heaterLengthL.value),
+    Number(escapeLengthL.value),
+    pipeDiameter
+  );
 
-  // A = (ヒーター電線全長 / 配管長さ − 配管逃げ寸法)
-  const A = heaterLength / (pipeLength - escapeLength);
+  // 帰り（＝巻きピッチ）
+  const pitch = calcOne(
+    Number(pipeLengthR.value),
+    Number(heaterLengthR.value),
+    Number(escapeLengthR.value),
+    pipeDiameter
+  );
 
-  // A² − 1
-  const rootInner = Math.pow(A, 2) - 1;
-
-  if (rootInner <= 0) {
-    resultSpan.textContent = "計算不可（条件不正）";
+  if (go === null || pitch === null) {
+    resultSpan.textContent = "計算不可";
     return;
   }
 
-  // 最終式
-  const result =
-    Math.PI * (heaterWireDiameter + pipeDiameter) /
-    Math.sqrt(rootInner);
-
-  resultSpan.textContent = result.toFixed(2) + "mm";
+  resultSpan.textContent =
+    `行き：${go.toFixed(0)} mm ／ 巻きピッチ：${pitch.toFixed(0)} mm`;
 });
+
