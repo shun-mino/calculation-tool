@@ -84,7 +84,7 @@ button {
   }
   .two-col {
     display: flex;
-    gap: 36px;
+    gap: 120px;
     width: 100%;
   }
 
