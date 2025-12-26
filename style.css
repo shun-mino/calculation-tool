@@ -82,6 +82,16 @@ button {
     margin-left: 12px;
     margin-top: 0;
   }
+  .two-col {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .num-input {
+    max-width: 100px;
+    text-align: right;
+  }
 }
 
 
