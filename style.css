@@ -84,9 +84,16 @@ button {
   }
   .two-col {
     display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .two-cal{
+    display: flex;
     gap: 120px;
     width: 100%;
   }
+  
 
   .num-input {
     max-width: 100px;
