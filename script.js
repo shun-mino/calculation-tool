@@ -56,6 +56,6 @@ document.getElementById("calcBtn").addEventListener("click", () => {
   }
 
   resultSpan.textContent =
-    `ピッチ：${go.toFixed(0)} mm`;
+    `ピッチ=${go.toFixed(0)} mm`;
 });
 
