@@ -12,9 +12,6 @@ const pipeMap = {
   "100A": 114.3
 };
 
-// ヒーター電線外径（mm・固定）
-const heaterWireDiameter = 38.0;
-
 // 配管サイズ選択 → 外径表示
 document.getElementById("pipeSize").addEventListener("change", (e) => {
   const d = pipeMap[e.target.value];
@@ -22,14 +19,15 @@ document.getElementById("pipeSize").addEventListener("change", (e) => {
     d ? `外径：${d} mm` : "外径：-";
 });
 
-function calcOne(pipeLength, heaterLength, escapeLength, pipeDiameter) {
+function calcOne(heatersize, pipeLength, heaterLength, escapeLength, pipeDiameter) {
   if (pipeLength <= escapeLength) return null;
 
   const A = heaterLength / (pipeLength - escapeLength);
   const rootInner = A * A - 1;
   if (rootInner <= 0) return null;
+  const size = Math.PI * (heatersize + pipeDiameter) * 0.001;
 
-  return Math.PI * (38.0 + pipeDiameter) / Math.sqrt(rootInner);
+  return (size / Math.sqrt(rootInner))*1000;
 }
 
 document.getElementById("calcBtn").addEventListener("click", () => {
@@ -44,26 +42,20 @@ document.getElementById("calcBtn").addEventListener("click", () => {
 
   // 行き（通常）
   const go = calcOne(
-    Number(pipeLengthL.value),
-    Number(heaterLengthL.value),
-    Number(escapeLengthL.value),
+    Number(pipeLength.value),
+    Number(heaterLength.value),
+    number(heatersize.value),
+    Number(escapeLength.value),
     pipeDiameter
   );
 
-  // 帰り（＝巻きピッチ）
-  const pitch = calcOne(
-    Number(pipeLengthR.value),
-    Number(heaterLengthR.value),
-    Number(escapeLengthR.value),
-    pipeDiameter
-  );
 
-  if (go === null || pitch === null) {
+  if (go === null) {
     resultSpan.textContent = "計算不可";
     return;
   }
 
   resultSpan.textContent =
-    `行き：${go.toFixed(0)} mm ／ 巻きピッチ：${pitch.toFixed(0)} mm`;
+    `ピッチ：${go.toFixed(0)} mm`;
 });
 
