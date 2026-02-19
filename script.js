@@ -44,7 +44,7 @@ document.getElementById("calcBtn").addEventListener("click", () => {
   const go = calcOne(
     Number(pipeLength.value),
     Number(heaterLength.value),
-    number(heatersize.value),
+    Number(heatersize.value),
     Number(escapeLength.value),
     pipeDiameter
   );
