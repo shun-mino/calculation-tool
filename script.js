@@ -19,7 +19,7 @@ document.getElementById("pipeSize").addEventListener("change", (e) => {
     d ? `外径：${d} mm` : "外径：-";
 });
 
-function calcOne(heatersize, pipeLength, heaterLength, escapeLength, pipeDiameter) {
+function calcOne(pipeLength, heaterLength, heatersize, escapeLength, pipeDiameter) {
   if (pipeLength <= escapeLength) return null;
 
   const A = heaterLength / (pipeLength - escapeLength);
